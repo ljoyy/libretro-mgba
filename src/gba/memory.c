@@ -872,6 +872,8 @@ void GBAStore16(struct ARMCore* cpu, uint32_t address, int16_t value, int* cycle
 	int wait = 0;
 	int16_t oldValue;
 
+	ChisCartridgeHardwareWrite16(&memory->chishw, address, value);
+	
 	switch (address >> BASE_OFFSET) {
 	case GBA_REGION_EWRAM:
 		STORE_16(value, address & (GBA_SIZE_EWRAM - 2), memory->wram);
@@ -1014,6 +1016,8 @@ void GBAStore8(struct ARMCore* cpu, uint32_t address, int8_t value, int* cycleCo
 	int wait = 0;
 	uint16_t oldValue;
 
+	ChisCartridgeHardwareWrite8(&memory->chishw, address, value);
+	
 	switch (address >> BASE_OFFSET) {
 	case GBA_REGION_EWRAM:
 		((int8_t*) memory->wram)[address & (GBA_SIZE_EWRAM - 1)] = value;
